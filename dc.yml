@@ -1,0 +1,21 @@
+kind: "DeploymentConfig"
+apiVersion: "v1"
+metadata:
+  name: "tutorial"
+spec:
+  template:
+    metadata:
+      labels:
+        name: "tutorial"
+    spec:
+      containers: # containers used for running applications
+        - name: "tutorial"
+          image: "lyhsoft/tutorial:BUILD_NUMBER"
+          ports:
+            - containerPort: 1234
+              protocol: "TCP"
+  replicas: 1 # scaling
+  strategy: # strategy of deploying your pods on the platform
+    type: "Rolling"
+  paused: false
+  revisionHistoryLimit: 2
